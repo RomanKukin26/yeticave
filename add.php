@@ -83,18 +83,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "lot" => $lot,
             "errors" => $errors
          ]);
-    } else {
+    } 
+    else {
         $sql = get_query_create_lot(2);
         $stmt = db_get_prepare_stmt_version($con, $sql, $lot);
         $res = mysqli_stmt_execute($stmt);
         
-
-    if ($res) {
-        $lot_id = mysqli_insert_id($con);
-        header("Location: /lot.php?id=" .$lot_id);
-    } else {
-        $error = mysqli_error($con);
-    }
+        if ($res) {
+            $lot_id = mysqli_insert_id($con);
+            header("Location: /lot.php?id=" .$lot_id);
+        } 
+        else {
+            $error = mysqli_error($con);
+        }
     }
 }
 
